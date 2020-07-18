@@ -1,4 +1,5 @@
 # Android Drawable Dsl
+[![Release](https://jitpack.io/v/tiiime/android-drawable-dsl.svg)](https://jitpack.io/#tiiime/android-drawable-dsl) ![](https://img.shields.io/github/languages/code-size/tiiime/android-drawable-dsl.svg) ![](https://img.shields.io/github/languages/top/tiiime/android-drawable-dsl.svg)
 
 ## Example
 
@@ -65,3 +66,22 @@ private fun createLayerList() = layerList(
 ### more 
 
 ![](screenshot/animate.gif)
+
+
+## Install
+
+```groovy
+allprojects {
+    repositories {
+       jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+
+[![Release](https://jitpack.io/v/tiiime/android-drawable-dsl.svg)](https://jitpack.io/#tiiime/android-drawable-dsl)
+
+
+```groovy
+compile "com.github.tiiime:android-drawable-dsl:TAG"
+```
