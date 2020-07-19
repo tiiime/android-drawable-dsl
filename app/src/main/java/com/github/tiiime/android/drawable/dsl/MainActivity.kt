@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createLayerList() = layerList(
         item {
-            shape = shape {
+            drawable = shape {
                 corners(
                     cornerTopRight = 80F,
                     cornerBottomLeft = 80F
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             right = 30,
             bottom = 30
         ) {
-            shape = shape {
+            drawable = shape {
                 color = Color.WHITE
                 corners(80F)
             }

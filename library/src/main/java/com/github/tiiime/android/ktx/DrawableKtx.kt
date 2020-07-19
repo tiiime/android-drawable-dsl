@@ -14,7 +14,7 @@ inline fun shape(
     .apply { setShape(shape) }
 
 fun layerList(vararg array: LayerListItem): LayerDrawable = LayerDrawable(
-    array.map(LayerListItem::shape).toTypedArray()
+    array.map(LayerListItem::drawable).toTypedArray()
 ).apply {
     array.forEachIndexed { index, item ->
         setLayerInset(index, item.left, item.top, item.right, item.bottom)
@@ -76,7 +76,7 @@ class ShapeSetter(val drawable: GradientDrawable = GradientDrawable()) {
 }
 
 class LayerListItem(
-    var shape: Drawable? = null,
+    var drawable: Drawable? = null,
     var left: Int = 0,
     var top: Int = 0,
     var right: Int = 0,
