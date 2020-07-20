@@ -63,6 +63,10 @@ class ShapeSetter(val drawable: GradientDrawable = GradientDrawable()) {
         )
     }
 
+    fun size(width: Int, height: Int) = drawable.setSize(width, height)
+
+    fun solid(@ColorInt color: Int) = drawable.setColor(color)
+
     fun stroke(
         @ColorInt color: Int,
         dashGap: Float = 0F,
