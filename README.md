@@ -83,5 +83,5 @@ allprojects {
 
 
 ```groovy
-compile "com.github.tiiime:android-drawable-dsl:TAG"
+compile "com.github.tiiime:android-drawable-dsl:0.2.0"
 ```
