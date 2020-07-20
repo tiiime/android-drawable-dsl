@@ -3,7 +3,23 @@ package com.github.tiiime.android.ktx
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.RotateDrawable
 import androidx.annotation.ColorInt
+
+inline fun rotate(
+    fromDegrees: Float? = null,
+    pivotY: Float? = null,
+    pivotX: Float? = null,
+    toDegrees: Float? = null,
+    init: (RotateDrawable.() -> Unit) = {}
+): RotateDrawable = RotateDrawable()
+    .apply {
+        fromDegrees?.run(this::setFromDegrees)
+        toDegrees?.run(this::setToDegrees)
+        pivotX?.run(this::setPivotX)
+        pivotY?.run(this::setPivotY)
+    }
+    .apply(init)
 
 inline fun shape(
     shape: Int = GradientDrawable.RECTANGLE,
