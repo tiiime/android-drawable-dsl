@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         showcaseList.add(createCorner())
         showcaseList.add(createLayerList())
         showcaseList.add(createMoreColor())
+        showcaseList.add(createProgressBar(Color.RED, Color.GREEN, Color.BLUE))
 
         list.adapter = Adapter(showcaseList)
         list.layoutManager = LinearLayoutManager(this)
@@ -121,5 +123,43 @@ class MainActivity : AppCompatActivity() {
             Color.TRANSPARENT,
             Color.GREEN
         )
+    }
+
+    /**
+     * <item>
+     *     <shape
+     *         android:innerRadiusRatio="2.15"
+     *         android:shape="ring"
+     *         android:thicknessRatio="50.0" >
+     *         <gradient
+     *             android:id="@+id/progressCompensationColor"
+     *             android:startColor="@color/colorCompensationEasyGreen"
+     *             android:centerColor="@color/colorCompensationMediumGreen"
+     *             android:endColor="@color/colorCompensationHardGreen"
+     *             android:centerX="0.3"
+     *             android:type="sweep" />
+     *     </shape>
+     * </item>
+     */
+    private fun createProgressBar(
+        @ColorInt startColor: Int,
+        @ColorInt centerColor: Int,
+        @ColorInt endColor: Int
+    ) = shape(
+        shape = GradientDrawable.RING,
+        thickness = 11,
+        thicknessRatio = 50F,
+        innerRadiusRatio = 2.15F
+    ) {
+        gradient(
+            type = GradientDrawable.SWEEP_GRADIENT,
+            startColor = startColor,
+            centerColor = centerColor,
+            endColor = endColor,
+            centerX = 0.3F
+        )
+    }.apply {
+        // for demo displaying
+        level = 10000
     }
 }

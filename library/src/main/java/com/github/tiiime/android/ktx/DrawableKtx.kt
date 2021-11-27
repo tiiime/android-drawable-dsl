@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import androidx.annotation.ColorInt
 
 inline fun rotate(
@@ -23,11 +24,21 @@ inline fun rotate(
 
 inline fun shape(
     shape: Int = GradientDrawable.RECTANGLE,
+    innerRadiusRatio: Float? = null,
+    thicknessRatio: Float? = null,
+    thickness: Int? = null,
     init: (ShapeSetter.() -> Unit) = {}
 ): GradientDrawable = ShapeSetter()
     .apply(init)
     .let(ShapeSetter::drawable)
-    .apply { setShape(shape) }
+    .apply {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            innerRadiusRatio?.run(::setInnerRadiusRatio)
+            thicknessRatio?.run(::setThicknessRatio)
+            thickness?.run(::setThickness)
+        }
+        setShape(shape)
+    }
 
 fun layerList(vararg array: LayerListItem): LayerDrawable = LayerDrawable(
     array.map(LayerListItem::drawable).toTypedArray()
@@ -53,7 +64,10 @@ class ShapeSetter(val drawable: GradientDrawable = GradientDrawable()) {
         @ColorInt startColor: Int,
         @ColorInt centerColor: Int? = null,
         @ColorInt endColor: Int,
-        angel: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM
+        angel: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
+        centerX: Float = 0.5F,
+        centerY: Float = 0.5F,
+        useLevel: Boolean = false
     ) {
         drawable.colors = if (centerColor == null) {
             intArrayOf(startColor, endColor)
@@ -62,6 +76,8 @@ class ShapeSetter(val drawable: GradientDrawable = GradientDrawable()) {
         }
         drawable.gradientType = type
         drawable.orientation = angel
+        drawable.setGradientCenter(centerX, centerY)
+        drawable.useLevel = useLevel
     }
 
     fun corners(
