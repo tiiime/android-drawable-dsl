@@ -69,16 +69,30 @@ class ShapeSetter(val drawable: GradientDrawable = GradientDrawable()) {
         centerY: Float = 0.5F,
         useLevel: Boolean = false
     ) {
-        drawable.colors = if (centerColor == null) {
+        val array = if (centerColor == null) {
             intArrayOf(startColor, endColor)
         } else {
             intArrayOf(startColor, centerColor, endColor)
         }
+
+        gradient(type, array, angel, centerX, centerY, useLevel)
+    }
+
+    fun gradient(
+        type: Int = GradientDrawable.LINEAR_GRADIENT,
+        colorArray: IntArray,
+        angel: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
+        centerX: Float = 0.5F,
+        centerY: Float = 0.5F,
+        useLevel: Boolean = false
+    ) {
+        drawable.colors = colorArray
         drawable.gradientType = type
         drawable.orientation = angel
         drawable.setGradientCenter(centerX, centerY)
         drawable.useLevel = useLevel
     }
+
 
     fun corners(
         corner: Float = 0F,
